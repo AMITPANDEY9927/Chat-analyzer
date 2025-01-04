@@ -1,6 +1,7 @@
 import streamlit as st
 import preprocessor,helper
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 import seaborn as sns
 
 
@@ -55,7 +56,6 @@ if upload_file is not None:
         plt.xticks(rotation='vertical')
         st.pyplot(fig)
 
-        
         st.title('Activity Map')
         col1, col2 = st.columns(2)
 
@@ -117,12 +117,12 @@ if upload_file is not None:
         with col1:
              st.dataframe(emoji_df)
         with col2:
-
-            fig,ax=plt.subplots()
-            # ax.pie(emoji_df[0],emoji_df[1])
-            ax.pie(emoji_df[1].head(), labels=emoji_df[0].head(), autopct='%.2f%%')
-
+            emoji_font = fm.FontProperties(fname='C:\Windows\Fonts\seguiemj.ttf')
+            fig, ax = plt.subplots()
+            ax.pie(emoji_df[1].head(), labels=emoji_df[0].head(), autopct='%.2f%%',
+                   textprops={'fontproperties': emoji_font})
             st.pyplot(fig)
+
 
 
 
