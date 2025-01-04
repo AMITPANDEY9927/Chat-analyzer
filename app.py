@@ -55,17 +55,7 @@ if upload_file is not None:
         plt.xticks(rotation='vertical')
         st.pyplot(fig)
 
-        # Activity map
-        # st.title('Activity Map')
-        # col1,col2=st.columns(2)
-        #
-        # with col1:
-            # st.header('Most busy Day')
-            # busy_day=helper.week_activity_map(selected_user,df)
-            # fig,ax=plt.subplots()
-            # ax.bar(busy_day.index,busy_day.values)
-            # plt.xticks(rotation='vertical')
-            # st.pyplot(fig)
+        
         st.title('Activity Map')
         col1, col2 = st.columns(2)
 
@@ -130,7 +120,7 @@ if upload_file is not None:
 
             fig,ax=plt.subplots()
             # ax.pie(emoji_df[0],emoji_df[1])
-            ax.pie(emoji_df[1], labels=emoji_df[0], autopct='%.2f%%')
+            ax.pie(emoji_df[1].head(), labels=emoji_df[0].head(), autopct='%.2f%%')
 
             st.pyplot(fig)
 
