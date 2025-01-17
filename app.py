@@ -7,7 +7,7 @@ import seaborn as sns
 
 
 st.sidebar.title("whatsapp chat analyzer")
-upload_file=st.sidebar.file_uploader("chose a file")
+upload_file=st.sidebar.file_uploader("chose a file with 24 hour chat format")
 if upload_file is not None:
     bytes_data=upload_file.getvalue()
     data=bytes_data.decode("utf8")
@@ -110,18 +110,25 @@ if upload_file is not None:
         st.title("Most Common Words")
         st.pyplot(fig)
 
-#         emoji analysis
+         #emoji analysis
         emoji_df=helper.emoji_helper(selected_user,df)
         st.title("Emoji analysis")
         col1,col2=st.columns(2)
-        with col1:
-             st.dataframe(emoji_df)
-        with col2:
-            emoji_font = fm.FontProperties(fname='C:\Windows\Fonts\seguiemj.ttf')
-            fig, ax = plt.subplots()
-            ax.pie(emoji_df[1].head(), labels=emoji_df[0].head(), autopct='%.2f%%',
+        if not emoji_df.empty:
+            with col1:
+                st.dataframe(emoji_df)
+            with col2:
+                emoji_font = fm.FontProperties(fname='C:\Windows\Fonts\seguiemj.ttf')
+                fig, ax = plt.subplots()
+                ax.pie(emoji_df[1].head(10), labels=emoji_df[0].head(10), autopct='%.2f%%',
                    textprops={'fontproperties': emoji_font})
-            st.pyplot(fig)
+                st.pyplot(fig)
+        else:
+            # st.write("No emojis used by the selected user.")
+            st.markdown(
+                "<h3 style='color: #FF6347; text-align: center;'>No Emojis used by the selected user.</h3>",
+                unsafe_allow_html=True
+            )
 
 
 
